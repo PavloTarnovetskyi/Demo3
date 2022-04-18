@@ -1,0 +1,7 @@
+FROM postgres:alpine
+
+ENV POSTGRES_USER=your_user
+ENV POSTGRES_PASSWORD=password_for_user
+ENV POSTGRES_DB=name_DB
+
+EXPOSE 5432

@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+    tools {
+        maven 'maven3'
+    }
+    stages{
+        stage ('Builds'){
+            steps{
+                sh script: 'mvn clean package'
+            }
+        }
+        stage ('Upload War To Nexus') {
+            steps{
+                nexusArtifactUploader artifacts: [
+                    [artifactId: 'geo',
+                     classifier: '',
+                      file: 'target/Geo Citizen-1.0.5-SNAPSHOT.war',
+                      type: 'war'
+                    ]
+                ],
+                 credentialsId: 'nexus3',
+                 groupId: 'com.softserveinc',
+                 nexusUrl: 'ip-nexus-repo',
+                 nexusVersion: 'nexus3',
+                 protocol: 'http',
+                 repository: 'geocitizen-releaze',
+                 version: '1.0.5-SNAPSHOT'                
+            }
+
+        }
+    }
+}

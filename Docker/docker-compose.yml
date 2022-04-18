@@ -1,0 +1,18 @@
+version: "3.9"
+services:
+  geocit_db:
+    image: <ip-nexus-repo:port>/postgesgeo:alpine
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data
+
+
+  citizen:
+    image: <ip-nexus-repo:port>/citizen
+    restart: always
+    ports:
+      - "8080:8080"
+    
+ 
